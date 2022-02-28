@@ -6,18 +6,18 @@ class User {
   }
 }
 
-function getUserTable(_url, _email, _password) {
-  var userCredentials = {
-    email: '"' + _email + '"',
-    password: '"' + _password + '"',
-  };
+// function getUserTable(_url, _email, _password) {
+//   var userCredentials = {
+//     email: '"' + _email + '"',
+//     password: '"' + _password + '"',
+//   };
 
-  let request = new XMLHttpRequest();
-  request.open("GET", _url, false);
-  request.send(JSON.stringify(userCredentials));
+//   let request = new XMLHttpRequest();
+//   request.open("GET", _url, false);
+//   request.send(JSON.stringify(userCredentials));
 
-  return request.responseText;
-}
+//   return request.responseText;
+// }
 
 //
 
