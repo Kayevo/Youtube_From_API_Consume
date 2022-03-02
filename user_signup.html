@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign up</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/index.js"></script>
-</head>
-<body>
-    <h4>SignUp user on Youtube</h4>
-</body>
+  </head>
+  <body>
+    <div class="Youtube_Pane">
+      <form action="">
+        <h2>User sign up</h2>
+        <label class="Input_Description">
+          E-mail:
+          <br />
+          <input class="YouTube_Input" id="email" />
+        </label>
+        <br /><br />
+        <label class="Input_Description">
+          Password :
+          <br />
+          <input class="YouTube_Input" id="password" />
+        </label>
+        <br /><br />
+        <label class="Input_Description">
+          Adminitrator:
+          <br />
+          <input type="checkbox" checked="checked" id="isAdminUser" />
+          <!-- <span class="checkmark"></span> -->
+        </label>
+        <br /><br />
+        <button
+          type="submit"
+          class="YouTube_Button"
+          onclick="application.signupUser()"
+        >
+          Sign up
+        </button>
+      </form>
+    </div>
+
+    <div class="Youtube_Pane">
+      <a href="index.html">
+        <button class="YouTube_Button">Home</button>
+      </a>
+    </div>
+  </body>
 </html>
