@@ -19,7 +19,7 @@ class Application {
     request.open(_method, _url, false);
     request.send(JSON.stringify(_user));
 
-    return request.responseText;
+    return request;
   }
 
   signupUser() {
@@ -28,12 +28,20 @@ class Application {
     var email = document.querySelector("#email").value;
     var password = document.querySelector("#password").value;
     var isAdminUser = document.getElementById("isAdminUser").checked;
+    var user;
+    var response;
+    var message;
 
-    var youtubeUser = new User(email, password, isAdminUser);
+    user = new User(email, password, isAdminUser);
+    response = this.runRequest(url, method, user);
 
-    if (youtubeUser) {
-      this.runRequest(url, method, youtubeUser);
+    if (response.status == 200) {
+      message = "User created successful";
+    } else {
+      message = response.responseText;
     }
+
+    window.alert(message);
   }
 
   getUserTable() {
@@ -41,21 +49,81 @@ class Application {
     var method = "POST";
     var email = document.querySelector("#email").value;
     var password = document.querySelector("#password").value;
+    var userCredentials;
+    var response;
+    var message;
+    var userTable;
+    var table = document.getElementById("userTable");
 
-    var userCredentials = new Credential(email, password);
+    userCredentials = new Credential(email, password);
+    response = this.runRequest(url, method, userCredentials);
 
-    if (userCredentials) {
-      this.runRequest(url, method, userCredentials);
+    if (response.status == 200) {
+      message = "User table generated successful";
+      userTable = JSON.parse(response.responseText);
+
+      let headertableLine = this.createHeaderTableLine();
+      table.appendChild(headertableLine);
+
+      userTable.forEach((element) => {
+        let tableLine = this.createTableLine(element);
+        table.appendChild(tableLine);
+      });
+    } else {
+      message = response.responseText;
     }
+
+    window.alert(message);
+  }
+
+  createHeaderTableLine() {
+    var tableLine = document.createElement("tr");
+    var columnHeadEmail = document.createElement("th");
+    var columnHeadPassword = document.createElement("th");
+    var columnHeadUserType = document.createElement("th");
+
+    columnHeadEmail.innerHTML = "E-mail";
+    columnHeadPassword.innerHTML = "Password";
+    columnHeadUserType.innerHTML = "User type";
+
+    tableLine.appendChild(columnHeadEmail);
+    tableLine.appendChild(columnHeadPassword);
+    tableLine.appendChild(columnHeadUserType);
+
+    return tableLine;
+  }
+
+  createTableLine(_user) {
+    var tableLine = document.createElement("tr");
+    var columnEmail = document.createElement("td");
+    var columnPassword = document.createElement("td");
+    var columnUserType = document.createElement("td");
+
+    columnEmail.innerHTML = _user.email;
+    columnPassword.innerHTML = _user.password;
+    columnUserType.innerHTML = _user.userType;
+
+    tableLine.appendChild(columnEmail);
+    tableLine.appendChild(columnPassword);
+    tableLine.appendChild(columnUserType);
+
+    return tableLine;
   }
 
   main() {
     var youtubeUser = new User("email1", "pass1", true);
     this.signupUser("http://127.0.0.1:5000/user/signup", "POST", youtubeUser);
 
-    var userCredentials = new Credential(youtubeUser.email, youtubeUser.password);
+    var userCredentials = new Credential(
+      youtubeUser.email,
+      youtubeUser.password
+    );
     console.log(
-      this.getUserTable("http://127.0.0.1:5000/user/table", "POST", userCredentials)
+      this.getUserTable(
+        "http://127.0.0.1:5000/user/table",
+        "POST",
+        userCredentials
+      )
     );
   }
 }

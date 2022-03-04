@@ -10,8 +10,8 @@
   </head>
   <body>
     <div class="Youtube_Pane">
-        <form action="">
-            <h2>User table</h2>
+        <!-- <form action=""> -->
+            <h2>Verify user</h2>
             <label class="Input_Description">
               E-mail:
               <br />
@@ -27,12 +27,17 @@
             <button
               type="submit"
               class="YouTube_Button"
-              onclick=""
+              onclick="application.getUserTable()"
             >
               Visualize user table
             </button>
-          </form>
+          <!-- </form> -->
     </div>
+
+    <div class="Youtube_Pane">
+        <h2>User table</h2>
+        <table id="userTable"></table>
+      </div>
 
     <div class="Youtube_Pane">
         <a href="index.html">

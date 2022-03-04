@@ -41,3 +41,15 @@ a:link {
 .Input_Description {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+table {
+  text-align: left;
+  border-color: rgb(0, 0, 0);
+  border: 1px solid;
+  width: 100%;
+}
+
+th,
+td {
+  margin: 5%;
+}
